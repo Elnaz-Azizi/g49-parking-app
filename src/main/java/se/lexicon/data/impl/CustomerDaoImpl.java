@@ -17,6 +17,9 @@ public class CustomerDaoImpl implements CustomerDao {
         //todo: Add necessary validations
         int id = CustomerSequencer.nextId();
         customer.setId(id);
+        if (customer == null) throw new IllegalArgumentException("Customer data is null.");
+        Optional<Customer> customerOptional = find(customer.getId());
+        if (customerOptional.isPresent()) throw new IllegalArgumentException("Customer ID is duplicate.");
         storage.add(customer);
         return customer;
     }

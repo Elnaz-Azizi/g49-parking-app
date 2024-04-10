@@ -1,7 +1,11 @@
 package se.lexicon.data.impl;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import se.lexicon.model.Customer;
+
+import java.util.Optional;
 
 public class CustomerDaoImplTest {
 
@@ -14,12 +18,29 @@ public class CustomerDaoImplTest {
 
     @Test
     public void testCreateCustomer() {
-        //todo: Implement JUnit test
+
+        Customer customer1 = new Customer("Elnaz","123456");
+        Customer actualCustomer = testObject.create(customer1); // 1001
+
+        Customer expectedCustomer = new Customer(1001, "Elnaz","123456");
+
+
+        Assertions.assertEquals(expectedCustomer.getId(), actualCustomer.getId());
+        Assertions.assertEquals(expectedCustomer.getName(), actualCustomer.getName());
+
     }
 
+
+
+
     @Test
-    public void findById() {
-        //todo: Implement JUnit test
+    public void testFindById() {
+
+        Customer customer1 = new Customer("Elnaz","123456");
+        Customer createdCustomer = testObject.create(customer1);
+        Optional<Customer> foundCustomer = testObject.find(1001);
+
+        Assertions.assertTrue(foundCustomer.isPresent());
 
     }
 
